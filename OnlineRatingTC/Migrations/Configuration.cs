@@ -18,7 +18,7 @@ namespace OnlineRatingTC.Migrations
 
         protected override void Seed(OnlineRatingTC.Models.ApplicationDbContext context)
         {
-            context.Users.AddOrUpdate(p=>p.Name,
+            context.ReviewUsers.AddOrUpdate(p=>p.Name,
                 new User
                 {
                     Name = "Charles Tremblay",
@@ -38,6 +38,37 @@ namespace OnlineRatingTC.Migrations
                     Email = "sy@test.com"
                 }
                 );
+
+            context.ReviewRatingTypes.AddOrUpdate(p => p.ReviewRatingTypeName,
+                new ReviewRatingType
+                {
+                    ReviewRatingTypeName = "Excellent"
+                },
+                new ReviewRatingType
+                {
+                    ReviewRatingTypeName = "Moderate"
+                },
+                new ReviewRatingType
+                {
+                    ReviewRatingTypeName = "Needs Improvement"
+                }
+            );
+
+            context.ServiceTypes.AddOrUpdate(p => p.ServiceTypeName,
+                new ServiceType
+                {
+                    ServiceTypeName = "service 1"
+                },
+                new ServiceType
+                {
+                    ServiceTypeName = "service 2"
+                },
+
+                new ServiceType
+                {
+                    ServiceTypeName = "service 3"
+                }
+            );
         }
     }
 }

@@ -30,7 +30,10 @@ namespace OnlineRatingTC.Models
             return new ApplicationDbContext();
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> ReviewUsers { get; set; }
+        public DbSet<ServiceType> ServiceTypes { get; set; }
+        public DbSet<ReviewRatingType> ReviewRatingTypes { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
     }
 }

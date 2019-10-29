@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineRatingTC.Models
 {
@@ -12,5 +13,7 @@ namespace OnlineRatingTC.Models
         //public string PostalCode { get; set; }
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }
