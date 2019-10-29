@@ -8,21 +8,24 @@ namespace OnlineRatingTC.Controllers
 {
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            return View();
+            //return View();
+
+            return RedirectToAction("Login", "Account");
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Transport Canada Online Rating Services.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            //ViewBag.Message = "Your contact page.";
 
             return View();
         }

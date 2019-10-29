@@ -1,0 +1,57 @@
+﻿@model OnlineRatingTC.ViewModels.ReviewViewModel
+
+
+
+<!DOCTYPE html>
+<head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+
+@*A user can view a list of all Reviews regardless of who created them that only displays the Review Rating.*@
+
+<h2>List of Reviews</h2>
+<table style="width:100%">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Review rating
+        </th>
+        @*<th>
+                Service Type
+            </th>
+            <th>
+                Comments
+            </th>*@
+        <th></th>
+    </tr>
+    @foreach (var item in Model.Reviews)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewRatingType.ReviewRatingTypeName)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ServiceType.ServiceTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>*@
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.ReviewsId }) |*@
+                @Html.ActionLink("Details", "Details", new { id = item.ReviewsId })
+                @*@Html.ActionLink("Delete", "Delete", new { id=item.ReviewsId })*@
+            </td>
+        </tr>
+    }
+</table>
