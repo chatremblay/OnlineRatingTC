@@ -24,6 +24,11 @@ namespace OnlineRatingTC.Services
             return db.ReviewUsers.Find(id);
         }
 
+        public User GetUserByEmail(string mail)
+        {
+            return db.ReviewUsers.FirstOrDefault(x=>x.Email == mail);
+        }
+
         public void CreateUser(User user)
         {
             db.ReviewUsers.Add(user);

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace OnlineRatingTC.Models
 {
@@ -14,6 +15,7 @@ namespace OnlineRatingTC.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Review> Reviews { get; set; }
     }
 }

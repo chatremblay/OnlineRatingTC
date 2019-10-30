@@ -3,38 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OnlineRatingTC.Models;
+using OnlineRatingTC.Services;
+using OnlineRatingTC.ViewModels;
 
 namespace OnlineRatingTC.Controllers
 {
     public class UserController : Controller
     {
-        // GET: User
-        public ActionResult Index()
-        {
-            return View();
-        }
+        private ApplicationDbContext db = new ApplicationDbContext();
+        //// GET: User
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
 
-        // GET: User/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        //// GET: User/Details/5
+        //public ActionResult Details(int id)
+        //{
+        //    return View();
+        //}
 
         // GET: User/Create
-        public ActionResult Create()
+        public ActionResult Create(string email)
         {
-            return View();
+            var userModel = new UsersViewModel();
+            userModel.Email = email;
+            return View(userModel);
         }
 
         // POST: User/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(UsersViewModel newUser)
         {
             try
             {
-                // TODO: Add insert logic here
+                var userService = new UsersServices(db);
+                var user = new User();
+                user.Email = newUser.Email;
+                user.Name = newUser.Name;
+                user.City = newUser.City;
 
-                return RedirectToAction("Index");
+                userService.CreateUser(user);
+                return RedirectToAction("Index", "Review");
             }
             catch
             {
@@ -64,6 +75,14 @@ namespace OnlineRatingTC.Controllers
         //    }
         //}
 
-        
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
     }
 }

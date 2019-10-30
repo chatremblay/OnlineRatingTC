@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace OnlineRatingTC.Models
 {
@@ -10,16 +11,19 @@ namespace OnlineRatingTC.Models
 
         [Required]
         [ForeignKey("UserId")]
+        [JsonIgnore]
         public virtual User User { set; get; }
         public int UserId{ set; get; }
 
         [Required]
         [ForeignKey("ServiceTypeCd")]
+        [JsonIgnore]
         public virtual ServiceType ServiceType { set; get; }
         public int ServiceTypeCd { set; get; }
 
         [Required]
         [ForeignKey("ReviewRatingTypeCd")]
+        [JsonIgnore]
         public virtual ReviewRatingType ReviewRatingType { get; set; }
         public int ReviewRatingTypeCd { set; get; }
 
