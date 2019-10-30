@@ -17,9 +17,10 @@ namespace OnlineRatingTC.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/UsersApi
-        public IQueryable<User> GetReviewUsers()
+        public HttpResponseMessage GetReviewUsers()
         {
-            return db.ReviewUsers;
+            var userTypes = db.ReviewUsers.ToList();
+            return Request.CreateResponse(HttpStatusCode.OK, userTypes, Configuration.Formatters.JsonFormatter);
         }
 
         // GET: api/UsersApi/5
@@ -29,75 +30,8 @@ namespace OnlineRatingTC.Controllers
             User user = db.ReviewUsers.Find(id);
             if (user == null)
             {
-                return NotFound();
+                return Ok(new User());
             }
-
-            return Ok(user);
-        }
-
-        // PUT: api/UsersApi/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutUser(int id, User user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != user.UserId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/UsersApi
-        [ResponseType(typeof(User))]
-        public IHttpActionResult PostUser(User user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.ReviewUsers.Add(user);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = user.UserId }, user);
-        }
-
-        // DELETE: api/UsersApi/5
-        [ResponseType(typeof(User))]
-        public IHttpActionResult DeleteUser(int id)
-        {
-            User user = db.ReviewUsers.Find(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            db.ReviewUsers.Remove(user);
-            db.SaveChanges();
-
             return Ok(user);
         }
 

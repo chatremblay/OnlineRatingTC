@@ -31,9 +31,9 @@ namespace OnlineRatingTC.Controllers
             Review review = db.Reviews.Find(id);
             if (review == null)
             {
-                return NotFound();
+                review = new Review();
+                return Ok(review);
             }
-
             return Ok(review);
         }
 

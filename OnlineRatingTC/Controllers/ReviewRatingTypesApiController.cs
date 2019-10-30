@@ -21,7 +21,6 @@ namespace OnlineRatingTC.Controllers
         {
             var reviewTypes = db.ReviewRatingTypes.ToList();
             return Request.CreateResponse(HttpStatusCode.OK, reviewTypes, Configuration.Formatters.JsonFormatter);
-            
         }
 
         // GET: api/ReviewRatingTypesApi/5
@@ -31,9 +30,9 @@ namespace OnlineRatingTC.Controllers
             ReviewRatingType reviewRatingType = db.ReviewRatingTypes.Find(id);
             if (reviewRatingType == null)
             {
-                return NotFound();
+                reviewRatingType = new ReviewRatingType();
+                return Ok(reviewRatingType);
             }
-
             return Ok(reviewRatingType);
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using OnlineRatingTC.Models;
 using OnlineRatingTC.Services;
 using OnlineRatingTC.ViewModels;
@@ -38,6 +39,24 @@ namespace OnlineRatingTC.Controllers
         {
             try
             {
+                bool error = false;
+                if (newUser.Name.IsEmpty())
+                {
+                    error = true;
+                    ModelState.AddModelError(string.Empty, "User Name cannot be empty");
+                }
+
+                if (newUser.City.IsEmpty())
+                {
+                    error = true;
+                    ModelState.AddModelError(string.Empty, "City cannot be empty");
+                }
+
+
+                if (error)
+                    return View("Create", newUser);
+
+
                 var userService = new UsersServices(db);
                 var user = new User();
                 user.Email = newUser.Email;
