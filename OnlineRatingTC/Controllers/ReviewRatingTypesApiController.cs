@@ -30,8 +30,7 @@ namespace OnlineRatingTC.Controllers
             ReviewRatingType reviewRatingType = db.ReviewRatingTypes.Find(id);
             if (reviewRatingType == null)
             {
-                reviewRatingType = new ReviewRatingType();
-                return Ok(reviewRatingType);
+                return NotFound();
             }
             return Ok(reviewRatingType);
         }

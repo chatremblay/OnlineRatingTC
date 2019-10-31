@@ -12,27 +12,28 @@ using OnlineRatingTC.Models;
 
 namespace OnlineRatingTC.Controllers
 {
-    public class UsersApiController : ApiController
+    public class ServiceTypesApiController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/UsersApi
-        public HttpResponseMessage GetReviewUsers()
+        // GET: api/ServiceTypesApi
+        public HttpResponseMessage GetServiceTypes()
         {
-            var userTypes = db.ReviewUsers.ToList();
-            return Request.CreateResponse(HttpStatusCode.OK, userTypes, Configuration.Formatters.JsonFormatter);
+            var servicesTypes = db.ServiceTypes.ToList();
+            return Request.CreateResponse(HttpStatusCode.OK, servicesTypes, Configuration.Formatters.JsonFormatter);
         }
 
-        // GET: api/UsersApi/5
-        [ResponseType(typeof(User))]
-        public IHttpActionResult GetUser(int id)
+        // GET: api/ServiceTypesApi/5
+        [ResponseType(typeof(ServiceType))]
+        public IHttpActionResult GetServiceType(int id)
         {
-            User user = db.ReviewUsers.Find(id);
-            if (user == null)
+            ServiceType serviceType = db.ServiceTypes.Find(id);
+            if (serviceType == null)
             {
                 return NotFound();
             }
-            return Ok(user);
+
+            return Ok(serviceType);
         }
 
         protected override void Dispose(bool disposing)
@@ -44,9 +45,9 @@ namespace OnlineRatingTC.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UserExists(int id)
+        private bool ServiceTypeExists(int id)
         {
-            return db.ReviewUsers.Count(e => e.UserId == id) > 0;
+            return db.ServiceTypes.Count(e => e.ServiceTypeCd == id) > 0;
         }
     }
 }

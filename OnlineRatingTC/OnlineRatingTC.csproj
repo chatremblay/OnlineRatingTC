@@ -180,9 +180,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReviewApiController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\ReviewRatingTypesApiController.cs" />
-    <Compile Include="Controllers\ReviewsApiController.cs" />
+    <Compile Include="Controllers\ServiceTypesApiController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UsersApiController.cs" />
     <Compile Include="Global.asax.cs">
