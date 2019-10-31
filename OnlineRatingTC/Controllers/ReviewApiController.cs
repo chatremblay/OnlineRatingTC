@@ -17,12 +17,21 @@ namespace OnlineRatingTC.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/ReviewApi
+        /// <summary>
+        /// get all the reviews from the database
+        /// </summary>
+        /// <returns></returns>
         public IQueryable<Review> GetReviews()
         {
             return db.Reviews;
         }
 
         // GET: api/ReviewApi/5
+        /// <summary>
+        /// get a particular review by review Id.  Not found is returned if the review does not exist
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Review))]
         public IHttpActionResult GetReview(int id)
         {
@@ -36,6 +45,11 @@ namespace OnlineRatingTC.Controllers
         }
 
         //POST: api/ReviewApi
+        /// <summary>
+        /// add a new review in the database
+        /// </summary>
+        /// <param name="review"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Review))]
         public IHttpActionResult PostReview(Review review)
         {
