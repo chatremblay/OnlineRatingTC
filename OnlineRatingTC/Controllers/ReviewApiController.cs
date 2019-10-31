@@ -53,12 +53,21 @@ namespace OnlineRatingTC.Controllers
         [ResponseType(typeof(Review))]
         public IHttpActionResult PostReview(Review review)
         {
+            if (review == null)
+            {
+                return BadRequest();
+            }
+
             var serviceTypeObj = db.ServiceTypes.FirstOrDefault(x => x.ServiceTypeCd == review.ServiceTypeCd);
             var reviewType = db.ReviewRatingTypes.FirstOrDefault(x => x.ReviewRatingTypeCd == review.ReviewRatingTypeCd);
             var user = db.ReviewUsers.FirstOrDefault(x => x.UserId == review.UserId);
 
-            if (serviceTypeObj == null || reviewType == null || user == null)
+            //validate any of the arguments.
+            if (serviceTypeObj == null || reviewType == null || user == null
+                || review.Comments == null || review.Comments.Length > 250)
+            {
                 return BadRequest("One of the arguments is not valid");
+            }
 
             review.User = user;
             review.ServiceType = serviceTypeObj;

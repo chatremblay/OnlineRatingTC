@@ -95,9 +95,13 @@ namespace OnlineRatingTC.Controllers
                 var userService = new UsersServices(db);
                 var userInfo = userService.GetUserByEmail(user.Email);
 
-                if (modelView.Note.IsEmpty())
+                if (modelView.Note.IsEmpty() || modelView.Note.Length > 250)
                 {
-                    ModelState.AddModelError(string.Empty, "Comments cannot be empty");
+                    if (modelView.Note.IsEmpty())
+                        ModelState.AddModelError(string.Empty, "Comments cannot be empty");
+                    else if (modelView.Note.Length > 250)
+                        ModelState.AddModelError(string.Empty, "Comments cannot be more that 250 characters");
+
                     var reviewInfoModel = GetReviewViewModel(userInfo.UserId);
                     reviewInfoModel.LogUser = userInfo;
                     return View("Create", reviewInfoModel);
