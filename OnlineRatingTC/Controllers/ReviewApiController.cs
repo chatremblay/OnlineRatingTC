@@ -72,13 +72,16 @@ namespace OnlineRatingTC.Controllers
             review.User = user;
             review.ServiceType = serviceTypeObj;
             review.ReviewRatingType = reviewType;
-            review.Comments = review.Comments;
-            review.UserId = user.UserId;
-            review.ReviewRatingTypeCd = reviewType.ReviewRatingTypeCd;
-            review.ServiceTypeCd = serviceTypeObj.ServiceTypeCd;
-
-            db.Reviews.Add(review);
-            db.SaveChanges();
+            //persist in database
+            try
+            {
+                db.Reviews.Add(review);
+                db.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
 
             return CreatedAtRoute("DefaultApi", new { id = review.ReviewsId }, review);
         }

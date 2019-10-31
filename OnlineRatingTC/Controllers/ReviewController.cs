@@ -95,6 +95,7 @@ namespace OnlineRatingTC.Controllers
                 var userService = new UsersServices(db);
                 var userInfo = userService.GetUserByEmail(user.Email);
 
+                //error handling , business rules.
                 if (modelView.Note.IsEmpty() || modelView.Note.Length > 250)
                 {
                     if (modelView.Note.IsEmpty())
@@ -108,13 +109,14 @@ namespace OnlineRatingTC.Controllers
                 }
 
                 var reviewService = new ReviewServices(db);
+                //create the review out of the viewModel.
+
                 var review = new Review();
 
                 review.Comments = modelView.Note;
                 review.ReviewRatingTypeCd = modelView.ReviewRatingCd;
                 review.ServiceTypeCd = modelView.SystemCd;
                 review.UserId = userInfo.UserId;
-
 
                 var serviceType = db.ServiceTypes.FirstOrDefault(x => x.ServiceTypeCd == modelView.SystemCd);
                 review.ServiceType = serviceType;
