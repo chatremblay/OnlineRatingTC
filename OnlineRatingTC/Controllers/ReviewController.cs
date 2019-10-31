@@ -122,7 +122,7 @@ namespace OnlineRatingTC.Controllers
                 reviewService.CreateReview(review);
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return RedirectToAction("Index");
             }
